@@ -1,0 +1,140 @@
+<!-- HEADER menu -->
+<app-header></app-header>
+
+<ngb-alert [dismissible]="true" type="info" class="w-50">
+    This process will guide you to register your <strong>documents</strong> to finalize your reservation!
+</ngb-alert>
+
+<div class="container-fluid py-3 bg-dark text-white">
+
+    <div class="row my-3">
+        <div class="form-group row align-items-center">
+            <label class="col-2 form-label">Reservation Number:</label>
+            <div class="col-2">
+                <input class="form-control" type="text" placeholder="XXXXXX" [(ngModel)]="res_num">
+            </div>
+            <div class="col-4">
+                <div class="btn-group w-50 my-4" role="group" aria-label="Basic example">
+                    <button class="btn btn-sm btn-outline-primary" (click)="getReservation()">Load</button>
+                    <button class="btn btn-sm btn-outline-primary mx-5" (click)="newReservation()">New one</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="step>0">
+        Reservation number: <strong>{{res_num}}</strong>
+
+        <p>Guest list:</p>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Birth Date</th>
+                    <th scope="col">Birth Place</th>
+                    <th scope="col">Residence</th>
+                    <th scope="col">Nationality</th>
+                    <th scope="col">Doc Type</th>
+                    <th scope="col">Doc Number</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (guest of res_guests; track guest.nome; let i = $index) {
+                <tr>
+                    <th scope="row">
+                        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/1/1f/Crystal_Clear_app_personal_bt2.png'"
+                            [alt]="" class="me-2" style="width: 20px" />
+                    </th>
+                    <td>{{ guest.nome }}</td>
+                    <td>{{ guest.cognome }}</td>
+                    <td>{{ guest.data_nascita }}</td>
+                    <td>{{ guest.luogo_nascita }}</td>
+                    <td>{{ guest.residenza }}</td>
+                    <td>{{ guest.cittadinanza }}</td>
+                    <td>{{ guest.doc_type }}</td>
+                    <td>{{ guest.doc_num }}</td>
+                    <td style="width: 200px;">
+                        <div class="btn-group mx-0" role="group" aria-label="Basic example">
+                            <button class="btn btn-sm btn-outline-primary mx-2" (click)="updateGuest(guest)">Update</button>
+                            <button class="btn btn-sm btn-outline-primary" (click)="deleteGuest(guest)">Delete</button>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+        <div class="col-2">
+            <button class="btn btn-sm btn-outline-primary" (click)="show_add_guest=true">Add New</button>
+        </div>
+
+        @if (show_add_guest || show_update_guest){
+        <div class="row was-validated">
+            <div class="row align-items-center my-2">
+                <label class="col-2 form-label">Name:</label>
+                <div class="col-2">
+                    <input class="form-control" type="text" placeholder="XXXXXX" [(ngModel)]="newGuest.nome" required>
+                </div>
+            </div>
+            <div class="form-group row align-items-center my-2">
+                <label class="col-2 form-label">Surname:</label>
+                <div class="col-2">
+                    <input class="form-control" type="text" placeholder="XXXXXX" [(ngModel)]="newGuest.cognome"
+                        required>
+                </div>
+            </div>
+            <div class="form-group row align-items-center my-2">
+                <label class="col-2 form-label">Birth Date:</label>
+                <div class="col-2">
+                    <input class="form-control" type="date" placeholder="YYYY-MM-DD" [(ngModel)]="newGuest.data_nascita"
+                        required>
+                </div>
+            </div>
+            <div class="form-group row align-items-center my-2">
+                <label class="col-2 form-label">Birth Place:</label>
+                <div class="col-2">
+                    <input class="form-control" type="text" placeholder="XXXXXX" [(ngModel)]="newGuest.luogo_nascita"
+                        required>
+                </div>
+            </div>
+            <div class="form-group row align-items-center my-2">
+                <label class="col-2 form-label">Residence:</label>
+                <div class="col-2">
+                    <input class="form-control" type="text" placeholder="XXXXXX" [(ngModel)]="newGuest.residenza"
+                        required>
+                </div>
+            </div>
+            <div class="form-group row align-items-center my-2">
+                <label class="col-2 form-label">Nationality:</label>
+                <div class="col-2">
+                    <input class="form-control" type="text" placeholder="XXXXXX" [(ngModel)]="newGuest.cittadinanza"
+                        required>
+                </div>
+            </div>
+            <div class="form-group row align-items-center my-2">
+                <label class="col-2 form-label">Doc Type:</label>
+                <div class="col-2">
+                    <input class="form-control" type="text" placeholder="XXXXXX" [(ngModel)]="newGuest.doc_type"
+                        required>
+                </div>
+            </div>
+            <div class="form-group row align-items-center my-2">
+                <label class="col-2 form-label">Doc Number:</label>
+                <div class="col-2">
+                    <input class="form-control" type="text" placeholder="XXXXXX" [(ngModel)]="newGuest.doc_num"
+                        required>
+                </div>
+            </div>
+
+            <div class="btn-group w-25 my-4" role="group" aria-label="Basic example">
+                <button class="btn btn-sm btn-outline-primary mx-5" (click)="addNewGuest()">Save</button>
+                <button class="btn btn-sm btn-outline-primary mx-5" (click)="show_add_guest=false;show_update_guest=false">Cancel</button>
+            </div>
+        </div>
+        }
+
+    </div>
+</div>

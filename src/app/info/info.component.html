@@ -1,0 +1,35 @@
+<!-- HEADER menu -->
+<app-header></app-header>
+
+<div class="container-fluid py-3 bg-dark text-white">
+    <div class="row my-3">
+      @if (images) {
+      <ngb-carousel [showNavigationArrows]="true" [showNavigationIndicators]="true" class="w-50 mx-auto">
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img height="400" [src]="images[0]" alt="Random first slide" style="margin-left: 100px;" />
+          </div>
+          <div class="carousel-caption text-black">
+            <h3>Castello con piscina</h3>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img height="400" [src]="images[1]" alt="Random second slide" style="margin-left: 100px;" />
+          </div>
+          <div class="carousel-caption text-black">
+            <h3>Vista mare</h3>
+          </div>
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <img height="400" [src]="images[2]" alt="Random third slide" style="margin-left: 100px;" />
+          </div>
+          <div class="carousel-caption text-black">
+            <h3>Relax e divertimento</h3>
+          </div>
+        </ng-template>
+      </ngb-carousel>
+      }
+    </div>
+</div>

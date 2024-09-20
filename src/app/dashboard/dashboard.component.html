@@ -1,0 +1,56 @@
+<!-- HEADER menu -->
+<app-header></app-header>
+<div class="container-fluid py-3 bg-dark text-white">
+    <div ngbDropdown class="d-inline-block">
+        <button type="button" class="btn btn-outline-primary px-5" id="dropdownBasic1" ngbDropdownToggle>
+            Active Reservations: <strong>{{reservations.length}}</strong>
+        </button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button ngbDropdownItem *ngFor="let item of reservations" (click)="loadReservation(item)">{{item}} - Guests:
+                {{res_guest_number(item)}}</button>
+        </div>
+    </div>
+
+    <div *ngIf="res_num>0" class="my-3">
+        Reservation number: <strong>{{res_num}}</strong>
+
+        <p>Guest list:</p>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Birth Date</th>
+                    <th scope="col">Birth Place</th>
+                    <th scope="col">Residence</th>
+                    <th scope="col">Nationality</th>
+                    <th scope="col">Doc Type</th>
+                    <th scope="col">Doc Number</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (guest of res_guests; track guest.nome; let i = $index) {
+                <tr>
+                    <th scope="row">
+                        <img [src]="'https://upload.wikimedia.org/wikipedia/commons/1/1f/Crystal_Clear_app_personal_bt2.png'"
+                            [alt]="" class="me-2" style="width: 20px" />
+                    </th>
+                    <td>{{ guest.nome }}</td>
+                    <td>{{ guest.cognome }}</td>
+                    <td>{{ guest.data_nascita }}</td>
+                    <td>{{ guest.luogo_nascita }}</td>
+                    <td>{{ guest.residenza }}</td>
+                    <td>{{ guest.cittadinanza }}</td>
+                    <td>{{ guest.doc_type }}</td>
+                    <td>{{ guest.doc_num }}</td>
+                    <td style="width: 200px;">
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
